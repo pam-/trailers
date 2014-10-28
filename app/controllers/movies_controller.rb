@@ -1,18 +1,14 @@
 class MoviesController < ApplicationController
 
 	def index
-		@movies = Movie.all
-		respond_to do |format|
-			format.html
-			format.xml { render xml: @movies }
-		end 
+
 	end
 
 	def show
 		@movie = Movie.find(params[:id])
 		respond_to do |format|
 			format.html
-			format.xml { render xml: @movie }
+			format.json { render json: @movie }
 		end 
 	end
 
@@ -24,13 +20,13 @@ class MoviesController < ApplicationController
 		@movie = Movie.new(movie_params)
 		if @movie.save
 			respond_to do |format|
-				format.html { redirect_to @movie }
-				format.xml { render xml: @movie }
+				format.html { redirect_to movies_path }
+				format.json { render json: @movie }
 			end 
 		else
 			respond_to do |format|
 				format.html { render :new }
-				format.xml { render status: 404 }
+				format.json { render status: 404 }
 			end  
 		end 
 	end
@@ -41,6 +37,11 @@ class MoviesController < ApplicationController
 
 	def update
 		@movie = Movie.find(params[:id])
+	end
+
+	private 
+	def movie_params
+		params.require(:movie).permit(:name, :synopsis, :release_date)
 	end
 
 end 

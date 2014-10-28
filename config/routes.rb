@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   
   root 'movies#index'
+  resources :movies
   
   devise_scope :user do
     get '/sign_up', to: 'devise/registrations#new'
