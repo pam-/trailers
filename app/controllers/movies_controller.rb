@@ -17,7 +17,7 @@ class MoviesController < ApplicationController
 	end
 
 	def create
-		@movie = Movie.new(movie_params)
+		@movie = current_user.movies.create(movie_params)
 		if @movie.save
 			respond_to do |format|
 				format.html { redirect_to movies_path }
