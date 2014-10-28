@@ -18,16 +18,11 @@ ActiveRecord::Schema.define(version: 20141027121927) do
 
   create_table "movies", force: true do |t|
     t.string "name"
-    t.string "trailer_link"
+    t.string "poster"
     t.text   "synopsis"
     t.string "release_date"
-    t.string "reminder_date"
+    t.string "status"
   end
-
-  add_index "movies", ["name"], name: "index_movies_on_name", using: :btree
-  add_index "movies", ["release_date"], name: "index_movies_on_release_date", using: :btree
-  add_index "movies", ["reminder_date"], name: "index_movies_on_reminder_date", using: :btree
-  add_index "movies", ["trailer_link"], name: "index_movies_on_trailer_link", using: :btree
 
   create_table "selections", force: true do |t|
     t.integer "user_id"
