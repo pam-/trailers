@@ -1,0 +1,32 @@
+body{
+	background: black;
+}
+
+#map{
+	width: 100%;
+	height: 500px;
+}
+
+//index of movies 
+
+aside{
+	float: left;
+	width: 30%;
+	text-align: center;
+	img{
+		display: block;
+		margin: 10px auto;
+		width: 80%;
+	}
+
+}
+
+.trailer{
+	position: fixed;
+	right: 50px;
+	top: 115px;
+	embed{
+		width: 800px;
+		height: 400px;
+	}
+}
