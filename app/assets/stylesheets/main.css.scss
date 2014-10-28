@@ -1,14 +1,28 @@
 body{
 	background: black;
+	color: white;
 }
 
+.success{
+	background: green;
+	width: 100%;
+	padding: 20px;
+	top:0;
+	position: fixed;
+	display: none;
+}
+
+
+
+// movies out already
 #map{
 	width: 100%;
 	height: 500px;
 }
 
-//index of movies 
 
+
+//index of movies 
 aside{
 	float: left;
 	width: 30%;

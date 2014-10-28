@@ -21,14 +21,11 @@ function mapGen(){
 			crossDomain: true,
     	success: function (xml){
 		  	values = xml.responseData.feed.entries;
-        console.log(values);
-        // console.log(xml.responseData)
+
         for (var i = 0; i <= 8; i++) {
         	theater = values[i]
         	var paragraph = theater.content.split('</p>')[0].split('<p>')[1]
-        	// make markers with each theater and when you click show each theaters movies in a list
         	$('#output').append(paragraph + '' + theater.title)
-        	// console.log(paragraph)
         };
       },
     	error: function(){console.log('merde')}

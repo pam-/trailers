@@ -1,5 +1,14 @@
-function getMovies() {
-	console.log('tomato')
+function index() {
+	$('#user-show').hide();
+	$('#usermovies').on('click', function(){
+		$('#index').hide();
+		userPage();
+	});
+
+	$('#comingsoon').on('click', function(){
+		console.log('in the making');
+	});
+
 	var url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?page_limit=16&page=1&country=us&apikey=gp8x4h757ztubg36gu2vdxh8';
 
 	$.ajax({
@@ -38,9 +47,6 @@ function displayMovies(movies){
 			dataType: 'jsonp',
 			success: function(results) {
 				videoLink = results.feed.entry[0].content.src
-				
-				console.log('in the success')
-				console.log(videoLink)
 				trailer = '<embed type="application/x-shockwave-flash" src="' + videoLink + '">'
 				$('.trailer').html(trailer);
 			}		
@@ -64,9 +70,10 @@ function displayMovies(movies){
 						name: result.title,
 						release_date: result.release_dates.theater,
 						synopsis: result.synopsis
+						poster: result.posters.original.replace(/tmb/, '320')
 					}},
 					success: function(){
-						console.log('done!')
+						$('.success').slideDown(200).slideUp('slow');
 					}
 				})
 			}
@@ -74,4 +81,4 @@ function displayMovies(movies){
 	})
 }
 
-$(document).ready(getMovies)
+$(document).ready(index)

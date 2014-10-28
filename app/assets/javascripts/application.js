@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require rotten_tomatoes
-//= require mapbox
+//= require user_show
+//= require map
+//= require index
+
