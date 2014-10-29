@@ -7,11 +7,11 @@ var searchBox = $('input');
 
 function mapGen(){
 
-	$('#map').show();
+	$('.map-input').show();
 	L.mapbox.accessToken = 'pk.eyJ1IjoicGFtLSIsImEiOiJNT09NSzgwIn0.AWl1AY_kO1HMnFHwxb9mww';
 	geocoder = L.mapbox.geocoder('mapbox.places-v1');
 	map = L.mapbox.map('map', mapId);
-	console.log(geocoder)
+	
 	searchButton.on('click', function(){
 		var zip = searchBox.val();
 		var url = 'http://www.fandango.com/rss/moviesnearme_' + zip + '.rss';
@@ -24,8 +24,8 @@ function mapGen(){
 			dataType: 'json',
     	success: function (xml){
 		  	values = xml.responseData.feed.entries;
-		  	// findCoordinates(values);
-		  	console.log(values)
+		  	findCoordinates(values);
+		  	// console.log(values)
       },
     	error: function(){
     		console.log('something is broken')
@@ -52,25 +52,31 @@ function findCoordinates(values){
   for (var i = 0; i <= 8; i++) {
   	theater = values[i];
   	var theater_name = theater.title;
+  	var theater_url = theater.link;
   	var addressArray = theater.content.split('</p>')[0].split('<p>')[1];
   	var address = addressArray.split(' ').join('+');
-
+  	console.log(address)
+  	console.log(theater_name)
   	var url = 'http://api.tiles.mapbox.com/v3/' + mapId + '/geocode/' + address + '.json';
   	$.ajax({
   		type: 'GET',
   		url: url,
+  		async: false,
   		dataType: 'json',
   		success: function(result){
-  			console.log(result.results[0][0].lon)
-  			var lng = result.results[0][0].lon
-  			var lat = result.results[0][0].lat
-  			markerGen(lat, lng, theater_name)
+  			console.log(result);
+  			console.log(theater_url)
+  			if (result.results.length === 1) {
+  				var lng = result.results[0][0].lon;
+  				var lat = result.results[0][0].lat;
+  				markerGen(lat, lng, theater_name, theater_url);
+  			};		
   		}
   	})
   };
 }
 
-function markerGen(lat, lng, theater_name) {
+function markerGen(lat, lng, theater_name, theater_url) {
 	myLayer = L.mapbox.featureLayer().addTo(map);
 	var geojson = {
 		type: 'FeatureCollection',
@@ -78,12 +84,13 @@ function markerGen(lat, lng, theater_name) {
 			type: 'Feature',
 			properties: {
 				title: theater_name,
-				'marker-color': 'orange',
+				'marker-color': '#bada55',
 				'marker-size': 'large',
+				url: theater_url
 			},
 			geometry: {
 				type: 'Point',
-				coordinates: [lat, lng]
+				coordinates: [lng, lat]
 			}
 		}]
 	}
@@ -101,6 +108,6 @@ function markerGen(lat, lng, theater_name) {
 	});
 
 	myLayer.on('click', function(event){
-		console.log('clicked on marker');
+		console.log(event.layer.feature.properties.url);
 	})
 }

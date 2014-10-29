@@ -1,8 +1,10 @@
 <header> 
-	<% if current_user %>
-	<li id="usermovies"><%= 'My Movies' %></li>
-	<li id="comingsoon"><%= 'Coming Soon' %></li>
-	<% else %>
-	<li> <%= link_to "Sign in", sign_in_path %> </li>
-	<% end %>
+	<ul>
+		<% if current_user %>
+			<li id="usermovies"><%= 'My Movies' %></li>
+			<li id="comingsoon"><%= 'Coming Soon' %></li>
+		<% else %>
+			<li> <%= link_to "Sign in", sign_in_path %> </li>
+		<% end %>
+	</ul>
 </header>

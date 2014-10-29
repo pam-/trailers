@@ -12,9 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require coming_soon
 //= require user_show
 //= require map
-//= require coming_soon
 //= require index
 

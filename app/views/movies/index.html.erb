@@ -4,20 +4,24 @@
 
 	<div id="index">
 		<aside></aside>
-		<div class="trailer"></div>
 	</div>
 
-	<div id="user-show">
-		<p> you are here</p>
+	<div class="trailer"></div>
+
 		<% @movies.each do |movie| %>
-			<img src="<%= movie.poster %>">
+			<div data-title="<%= movie.name %>" class="user-show">
+				<p> you are here</p>
+				<img src="<%= movie.poster %>">
+				<button class="watch-trailer">Trailer</button>
+			</div>
 		<% end %>
+
+	<div class="map-input">
+		<div id="map"></div>
+
+		<input type="text" placeholder="20850">
+		<button> Find movies </button>
 	</div>
-
-	<div id="map"></div>
-
-	<input type="text" placeholder="20850">
-	<button> Find movies </button>
 
 
 

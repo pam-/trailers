@@ -1,5 +1,6 @@
 $(document).ready(function() {
-	$('#user-show').hide();
+	$('.user-show').hide();
+	$('.map-input').hide();
 	$('#usermovies').on('click', function(){
 		$('#index').hide();
 		userPage();

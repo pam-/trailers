@@ -1,3 +1,7 @@
 function userPage(){
-	$('#user-show').show();
+	$('.map-input').hide();
+	$('.user-show').show();
+  $('.trailer').show();
+
+  
 }

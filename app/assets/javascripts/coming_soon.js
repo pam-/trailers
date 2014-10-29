@@ -1,6 +1,8 @@
 function comingSoon(){
+	$('.user-show').hide();
+	$('#index').show();	
 	var url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?page_limit=16&page=1&country=us&apikey=gp8x4h757ztubg36gu2vdxh8';
-	getMovies(url, 'coming soon', 'save', 'save')
+	getMovies(url, 'coming soon', 'save', 'save');
 }
 
 function getMovies(url, status, buttonValue, buttonClass){
@@ -10,7 +12,6 @@ function getMovies(url, status, buttonValue, buttonClass){
 		dataType: 'jsonp',
 		success: function(result){
 			var movies = result.movies
-			// console.log(movies)
 			displayMovies(movies, status, buttonValue, buttonClass)
 		}
 	})
@@ -31,7 +32,7 @@ function displayMovies(movies, status, buttonValue, buttonClass){
 	$('aside').html(posters);
 
 	$('.watch-trailer').on('click', function(){
-		$('#map').hide()
+		$('.map-input').hide();
 		movieTitle = $(this).parent().data('title');
 		youtubeUrl = 'http://gdata.youtube.com/feeds/api/videos?v=2&alt=json&max-results=1&q=%20' +movieTitle + '%20trailer&format=5&prettyprint=true';
 		
@@ -48,15 +49,12 @@ function displayMovies(movies, status, buttonValue, buttonClass){
 	})
 
 	$('.save').on('click', function(){
-		console.log('about to save', $(this).parent().data('title'))
 		var id = $(this).parent().data('id');
 		saveMovie(id)
 	})
 
 	$('.watch').on('click', function(){
-		console.log('about to pull up map')
 		var id = $(this).parent().data('id');
-		console.log('good to go')
 		mapGen();
 	})
 }
