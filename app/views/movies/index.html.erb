@@ -1,5 +1,3 @@
-<% if user_signed_in?  %>
-
 	<div class="success"> Saved! </div>
 
 	<div id="index">
@@ -10,12 +8,20 @@
 
 	<div class="trailer"></div>
 
+	<div class="user-show" id="user-movies">
 		<% @movies.each do |movie| %>
 			<div data-title="<%= movie.name %>" class="user-show">
 				<img src="<%= movie.poster %>">
 				<button class="watch-trailer">Trailer</button>
+
+				<a href="https://www.google.com/calendar/render?action=TEMPLATE&text=#{<%= movie.name %>}&dates=#{<%= movie.formatted_date %>}T230807Z/#{<%= movie.formatted_date %>}T003807Z&details=&location=&sprop=&sprop=name:#f" name="addtocalendar" title="Add to Calendar" >
+    			Add to Calendar
+				</a>
 			</div>
 		<% end %>
+
+
+	</div>
 
 	<div class="map-input">
 		<div id="map"></div>
@@ -25,7 +31,4 @@
 	</div>
 
 
-
-<% else %>
-	<div> Sign in yo </div>
-<% end %>
+<script type="text/javascript" src="https://addthisevent.com/libs/1.5.8/ate.min.js"></script>

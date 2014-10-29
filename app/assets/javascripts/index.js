@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$('.user-show').hide();
 	$('.map-input').hide();
+	
 	$('#usermovies').on('click', function(){
 		$('#index').hide();
 		userPage();
@@ -12,5 +13,5 @@ $(document).ready(function() {
 
 	var url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?page_limit=16&page=1&country=us&apikey=gp8x4h757ztubg36gu2vdxh8';
 
-	getMovies(url, 'in theaters', 'Find Theaters!', 'watch')
+	getMovies(url, 'Find Theaters!', 'watch')
 });

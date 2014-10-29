@@ -16,4 +16,3 @@
 //= require user_show
 //= require map
 //= require index
-

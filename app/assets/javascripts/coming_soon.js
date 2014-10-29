@@ -2,22 +2,22 @@ function comingSoon(){
 	$('.user-show').hide();
 	$('#index').show();	
 	var url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?page_limit=16&page=1&country=us&apikey=gp8x4h757ztubg36gu2vdxh8';
-	getMovies(url, 'coming soon', 'save', 'save');
+	getMovies(url, 'save', 'save');
 }
 
-function getMovies(url, status, buttonValue, buttonClass){
+function getMovies(url, buttonValue, buttonClass){
 	$.ajax({
 		type: 'GET',
 		url: url,
 		dataType: 'jsonp',
 		success: function(result){
 			var movies = result.movies
-			displayMovies(movies, status, buttonValue, buttonClass)
+			displayMovies(movies, buttonValue, buttonClass)
 		}
 	})
 }
 
-function displayMovies(movies, status, buttonValue, buttonClass){
+function displayMovies(movies, buttonValue, buttonClass){
 	var posters = '';
 
 	for(var i = 0; i < movies.length; i++){
@@ -32,20 +32,7 @@ function displayMovies(movies, status, buttonValue, buttonClass){
 	$('aside').html(posters);
 
 	$('.watch-trailer').on('click', function(){
-		$('.map-input').hide();
-		movieTitle = $(this).parent().data('title');
-		youtubeUrl = 'http://gdata.youtube.com/feeds/api/videos?v=2&alt=json&max-results=1&q=%20' +movieTitle + '%20trailer&format=5&prettyprint=true';
-		
-		$.ajax({
-			type: 'GET',
-			url: youtubeUrl,
-			dataType: 'jsonp',
-			success: function(results) {
-				videoLink = results.feed.entry[0].content.src
-				trailer = '<embed type="application/x-shockwave-flash" src="' + videoLink + '">'
-				$('.trailer').html(trailer);
-			}		
-		})
+		watchTrailer($(this))
 	})
 
 	$('.save').on('click', function(){
@@ -67,20 +54,57 @@ function saveMovie(id){
 		url: detailUrl,
 		dataType: 'jsonp',
 		success: function(result){
-			$.ajax({
-				type: 'POST',
-				url: '/movies',
-				data: { movie: {
-					name: result.title,
-					release_date: result.release_dates.theater,
-					synopsis: result.synopsis,
-					poster: result.posters.original.replace(/tmb/, '320'),
-					status: 'in theaters'
-				}},
-				success: function(){
-					$('.success').slideDown(200).slideUp('slow');
-				}
-			})
+			$('#user-movies').append(
+				'<div data-title="' + result.title + '" class="user-show">'+
+				'<img src="' + result.posters.original.replace(/tmb/, '320') + '">'+
+				'<button class="watch-trailer">Trailer</button>'+
+				'</div>');
+			save(result);
 		}
 	})
+}
+
+function save(result){
+	var title = movie.title;
+	var release_date = result.release_dates.theater;
+	var formatted_date = release_date.replace(/-/gi, '')
+	var synopsis = result.synopsis;
+	var poster = result.posters.original.replace(/tmb/, '320');
+	$.ajax({
+		type: 'POST',
+		url: '/movies',
+		data: { movie: {
+			title: title,
+			release_date: release_date,
+			formatted_date: formatted_date,
+			synopsis: synopsis,
+			poster: poster,
+			status: 'coming soon'
+		}},
+		success: function(){
+			$('.success').slideDown(200).slideUp('slow');
+		}
+	})
+
+	$('.watch-trailer').on('click', function(){
+		watchTrailer($(this));
+	})
+}
+
+function watchTrailer(element){
+	$('.map-input').hide();
+	$('.trailer').show();
+	movieTitle = element.parent().data('title');
+	youtubeUrl = 'http://gdata.youtube.com/feeds/api/videos?v=2&alt=json&max-results=1&q=%20' +movieTitle + '%20trailer&format=5&prettyprint=true';
+	
+	$.ajax({
+		type: 'GET',
+		url: youtubeUrl,
+		dataType: 'jsonp',
+		success: function(results) {
+			videoLink = results.feed.entry[0].content.src
+			trailer = '<embed type="application/x-shockwave-flash" src="' + videoLink + '">'
+			$('.trailer').html(trailer);
+		}		
+	})	
 }

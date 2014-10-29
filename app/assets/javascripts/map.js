@@ -6,7 +6,7 @@ var searchButton = $('button');
 var searchBox = $('input');
 
 function mapGen(){
-
+	$('.trailer').hide();
 	$('.map-input').show();
 	L.mapbox.accessToken = 'pk.eyJ1IjoicGFtLSIsImEiOiJNT09NSzgwIn0.AWl1AY_kO1HMnFHwxb9mww';
 	geocoder = L.mapbox.geocoder('mapbox.places-v1');

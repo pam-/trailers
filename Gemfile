@@ -38,4 +38,3 @@ gem 'devise'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
