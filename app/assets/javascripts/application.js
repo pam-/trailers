@@ -15,5 +15,6 @@
 //= require turbolinks
 //= require user_show
 //= require map
+//= require coming_soon
 //= require index
 

@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
 
 	def index
-		@movies = current_user.movies
+		@movies = current_user.movies if current_user
 		respond_to do |format|
 			format.html
 			format.json { render json: @movies }
@@ -45,7 +45,7 @@ class MoviesController < ApplicationController
 
 	private 
 	def movie_params
-		params.require(:movie).permit(:name, :synopsis, :release_date)
+		params.require(:movie).permit(:name, :synopsis, :release_date, :status, :poster)
 	end
 
 end 

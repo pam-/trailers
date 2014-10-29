@@ -1,42 +1,63 @@
 var map;
-var searchButton = document.getElementsByTagName('button')[0];
-var searchBox = document.getElementsByTagName('input')[0];
+var geocoder;
+var mapId = 'pam-.jmeb29bh';
+var searchButton = $('button');
+var searchBox = $('input');
 
 function mapGen(){
+
+	$('#map').show()
 	L.mapbox.accessToken = 'pk.eyJ1IjoicGFtLSIsImEiOiJNT09NSzgwIn0.AWl1AY_kO1HMnFHwxb9mww';
-	L.mapbox.map('map', 'pam-.jmeb29bh');
-	console.log('here')
+	geocoder = L.mapbox.geocoder('mapbox.places-v1');
+	map = L.mapbox.map('map', mapId);
+	console.log(geocoder)
+	searchButton.on('click', function(){
+		var zip = searchBox.val();
+		var url = 'http://www.fandango.com/rss/moviesnearme_' + zip + '.rss';
+		var parsedUrl = document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=1000&callback=?&q=' + encodeURIComponent(url);
+		zoom(zip)
 
-	// put input box where user can look for movie
-	searchButton.addEventListener('click', function(){
-		console.log('button has been clicked')
-		zip = searchBox.value
-		console.log('value:', zip)
-
-	url = 'http://www.fandango.com/rss/moviesnearme_' + zip + '.rss';
 		$.ajax({
 			type: 'GET',
-			url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=1000&callback=?&q=' + encodeURIComponent(url),
+			url: parsedUrl,
 			dataType: 'json',
-			crossDomain: true,
     	success: function (xml){
 		  	values = xml.responseData.feed.entries;
-
-        for (var i = 0; i <= 8; i++) {
-        	theater = values[i]
-        	var paragraph = theater.content.split('</p>')[0].split('<p>')[1]
-        	$('#output').append(paragraph + '' + theater.title)
-        };
+		  	findCoordinates(values)
       },
     	error: function(){console.log('merde')}
 		  });
 
 		searchBox.value = '';
 	});
-	// check fandango api to see if the movie is actually playing
-	// get theaters depending on fandango results and make markers
-	// click on marker and get 
-
 }
 
-// window.onload = mapGen;
+function zoom(zip){
+	geocoder.query(zip, showMap);
+
+	function showMap(err, data){
+		if (data.lbounds) {
+			map.fitBounds(data.lbounds);
+		} else if (data.latlng) {
+			map.setView([data.latlng[0], data.latlng[1]], 15)
+		}
+	}
+}
+
+function findCoordinates(values){
+  for (var i = 0; i <= 8; i++) {
+  	theater = values[i];
+  	var addressArray = theater.content.split('</p>')[0].split('<p>')[1]
+  	var address = addressArray.split(' ').join('+')
+
+  	var url = 'http://api.tiles.mapbox.com/v3/' + mapId + '/geocode/' + address + '.json'
+  	$.ajax({
+  		type: 'GET',
+  		url: url,
+  		dataType: 'json',
+  		success: function(result){
+  			console.log(result.results[0][0].lon)
+  		}
+  	})
+  };
+}

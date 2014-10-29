@@ -1,16 +1,26 @@
-<!-- <div id="map"></div>
+<% if user_signed_in?  %>
 
-<input type="text" placeholder="Enter Location">
-<button> Find movies </button>
- -->
+	<div class="success"> Saved! </div>
 
-<div class="success"> Saved! </div>
+	<div id="index">
+		<aside></aside>
+		<div class="trailer"></div>
+	</div>
 
-<div id="index">
-	<aside></aside>
-	<div class="trailer"></div>
-</div>
+	<div id="user-show">
+		<p> you are here</p>
+		<% @movies.each do |movie| %>
+			<img src="<%= movie.poster %>">
+		<% end %>
+	</div>
 
-<div id="user-show">
-	<p> you are here</p>
-</div>
+	<div id="map"></div>
+
+	<input type="text" placeholder="20850">
+	<button> Find movies </button>
+
+
+
+<% else %>
+	<div> Sign in yo </div>
+<% end %>
