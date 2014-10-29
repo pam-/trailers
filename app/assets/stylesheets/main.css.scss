@@ -1,6 +1,5 @@
 body{
-	background: black;
-	color: white;
+	background: #fff;
 }
 
 .success{
@@ -14,14 +13,25 @@ body{
 
 
 //index of movies 
-aside{
-	float: left;
+.side-contain{
+	position: absolute;
+	height: 500px;
 	width: 30%;
+	left: 0;
+	bottom: 0;
+	overflow: auto;
+	text-align: center;
+}
+aside{
+	position: relative;
 	text-align: center;
 	img{
 		display: block;
 		margin: 10px auto;
-		width: 80%;
+		width: 60%;
+	}
+	button{
+		margin-bottom: 40px;
 	}
 }
 

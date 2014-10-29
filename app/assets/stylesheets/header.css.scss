@@ -1,8 +1,19 @@
 header{
+	padding: 20px;
+	width: 100%;
+	background: #44C15F ;
+	&:after{
+		content: "";
+		clear: both;
+		display: block;
+	}
 	ul{
+		float: right;
+		margin-right: 80px;
 		list-style: none;
 		li{
 			display: inline-block;
+			margin-left: 20px;
 		}
 	}
 }

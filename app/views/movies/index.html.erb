@@ -3,14 +3,15 @@
 	<div class="success"> Saved! </div>
 
 	<div id="index">
-		<aside></aside>
+		<div class="side-contain">
+			<aside></aside>
+		</div>
 	</div>
 
 	<div class="trailer"></div>
 
 		<% @movies.each do |movie| %>
 			<div data-title="<%= movie.name %>" class="user-show">
-				<p> you are here</p>
 				<img src="<%= movie.poster %>">
 				<button class="watch-trailer">Trailer</button>
 			</div>
