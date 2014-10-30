@@ -1,11 +1,14 @@
 header{
 	padding: 20px;
 	width: 100%;
-	background: #44C15F ;
+	background: #9fe6ca ;
 	&:after{
 		content: "";
 		clear: both;
 		display: block;
+	}
+	img{
+		width: 8%;
 	}
 	ul{
 		float: right;
@@ -14,6 +17,15 @@ header{
 		li{
 			display: inline-block;
 			margin-left: 20px;
+			cursor: pointer;
 		}
+	}
+}
+
+a{
+	text-decoration: none;
+	color: inherit;
+	&:visited{
+		color: inherit;
 	}
 }

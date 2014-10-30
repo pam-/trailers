@@ -54,22 +54,28 @@ function saveMovie(id){
 		url: detailUrl,
 		dataType: 'jsonp',
 		success: function(result){
-			$('#user-movies').append(
-				'<div data-title="' + result.title + '" class="user-show">'+
-				'<img src="' + result.posters.original.replace(/tmb/, '320') + '">'+
-				'<button class="watch-trailer">Trailer</button>'+
-				'</div>');
 			save(result);
 		}
 	})
 }
 
 function save(result){
-	var title = movie.title;
+	var title = result.title;
 	var release_date = result.release_dates.theater;
 	var formatted_date = release_date.replace(/-/gi, '')
 	var synopsis = result.synopsis;
 	var poster = result.posters.original.replace(/tmb/, '320');
+
+	var googleUrl = 'https://www.google.com/calendar/render?action=TEMPLATE&text=' + title + '&dates=' + formatted_date + 'T230807Z/' + formatted_date + 'T003807Z&details=&location=&sprop=&sprop=name:#f';
+
+	$('#user-movies').append(
+	'<div data-title="' + title + '" class="user-show">'+
+	'<img src="' + poster + '">'+
+	'<button class="watch-trailer">Trailer</button>'+
+	'<a href="'+ googleUrl +'"> Add to Google Calendar </a>'+
+	'</div>');
+
+
 	$.ajax({
 		type: 'POST',
 		url: '/movies',

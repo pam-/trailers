@@ -15,6 +15,8 @@
  */
 
 @import 'normalize';
+@import url(http://fonts.googleapis.com/css?family=Lato);
+@import 'forms';
 @import 'header';
 @import 'main';
 @import 'responsive'

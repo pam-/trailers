@@ -1,5 +1,5 @@
 	<div class="success"> Saved! </div>
-
+<div class="container">
 	<div id="index">
 		<div class="side-contain">
 			<aside></aside>
@@ -9,13 +9,14 @@
 	<div class="trailer"></div>
 
 	<div class="user-show" id="user-movies">
+		<p> my movies </p>
 		<% @movies.each do |movie| %>
-			<div data-title="<%= movie.name %>" class="user-show">
+			<div data-title="<%= movie.title %>" class="user-show">
 				<img src="<%= movie.poster %>">
 				<button class="watch-trailer">Trailer</button>
 
-				<a href="https://www.google.com/calendar/render?action=TEMPLATE&text=#{<%= movie.name %>}&dates=#{<%= movie.formatted_date %>}T230807Z/#{<%= movie.formatted_date %>}T003807Z&details=&location=&sprop=&sprop=name:#f" name="addtocalendar" title="Add to Calendar" >
-    			Add to Calendar
+				<a href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%= movie.title %>&dates=<%= movie.formatted_date %>T230807Z/<%= movie.formatted_date %>T003807Z&details=&location=&sprop=&sprop=name:#f" name="addtocalendar" title="Add to Calendar" >
+    			<button>Add to Google Calendar</button>
 				</a>
 			</div>
 		<% end %>
@@ -30,5 +31,4 @@
 		<button> Find movies </button>
 	</div>
 
-
-<script type="text/javascript" src="https://addthisevent.com/libs/1.5.8/ate.min.js"></script>
+	</div>
