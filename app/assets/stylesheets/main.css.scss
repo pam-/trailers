@@ -67,12 +67,14 @@ input{
 	color: black;
 }
 
-	button{
-		margin-bottom: 40px;
-		background: #9fe6ca;
-		border-radius: 10px;
-		border: none;
-	}
+input[type="submit"],
+button{
+	margin-bottom: 40px;
+	background: #9fe6ca;
+	border-radius: 10px;
+	padding: 10px;
+	border: none;
+}
 
 .container{
 	width: 100%;
