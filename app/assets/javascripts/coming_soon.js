@@ -1,7 +1,7 @@
 function comingSoon(){
 	$('.user-show').hide();
 	$('#index').show();	
-	var url = 'https://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?page_limit=16&page=1&country=us&apikey=gp8x4h757ztubg36gu2vdxh8';
+	var url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?page_limit=16&page=1&country=us&apikey=gp8x4h757ztubg36gu2vdxh8';
 	getMovies(url, 'save', 'save');
 }
 
@@ -47,7 +47,7 @@ function displayMovies(movies, buttonValue, buttonClass){
 }
 
 function saveMovie(id){
-	var detailUrl = 'https://api.rottentomatoes.com/api/public/v1.0/movies/' + id + '.json?apikey=gp8x4h757ztubg36gu2vdxh8';
+	var detailUrl = 'http://api.rottentomatoes.com/api/public/v1.0/movies/' + id + '.json?apikey=gp8x4h757ztubg36gu2vdxh8';
 
 	$.ajax({
 		type: 'GET',
