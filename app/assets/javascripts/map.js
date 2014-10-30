@@ -108,6 +108,7 @@ function markerGen(lat, lng, theater_name, theater_url) {
 	});
 
 	myLayer.on('click', function(event){
-		console.log(event.layer.feature.properties.url);
+		window.open(event.layer.feature.properties.url)
+		// console.log(event.layer.feature.properties.url);
 	})
 }
