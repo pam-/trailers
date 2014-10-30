@@ -14,7 +14,7 @@ function mapGen(){
 	
 	searchButton.on('click', function(){
 		var zip = searchBox.val();
-		var url = 'http://www.fandango.com/rss/moviesnearme_' + zip + '.rss';
+		var url = 'https://www.fandango.com/rss/moviesnearme_' + zip + '.rss';
 		var parsedUrl = document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=1000&callback=?&q=' + encodeURIComponent(url);
 		zoom(zip)
 
