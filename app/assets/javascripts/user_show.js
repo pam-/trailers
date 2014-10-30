@@ -2,6 +2,9 @@ function userPage(){
 	$('.map-input').hide();
 	$('.user-show').show();
   $('.trailer').hide();
-  var userpage = { ext: 'my_movies' }
-  history.pushState( userpage, 'show', 'my_movies')
+
+  var userId = $('.container').data('user');
+  var userpage = { ext: userId+'/movies' };
+  history.pushState(userpage, 'show', userId+'/movies');
+  //make it happen once
 }
