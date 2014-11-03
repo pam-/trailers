@@ -25,8 +25,12 @@ function displayMovies(movies, buttonValue, buttonClass){
 		var thumbnail = movies[i].posters.original;
 		var id = movies[i].id;
 		var poster = thumbnail.replace(/tmb/, '320');
+		var releaseDate = movies[i].release_dates.theater;
+		var formattedDate = releaseDate.replace(/-/gi, '');
 
-		posters += '<div data-title="' + title + '" data-id="' + id + '"><img src="' + poster + '"> <button class="watch-trailer"> Watch Trailer</button> <button class="' + buttonClass + '">' + buttonValue + '</button> </div>';
+		console.log(movies[i]);
+
+		posters += '<div data-title="' + title + '" data-id="' + id + '"><img src="' + poster + '"> <button class="watch-trailer"> Watch Trailer</button> <button class="' + buttonClass + '">' + buttonValue + '</button> <button> <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=' + title + '&dates='+ formattedDate +'T230807Z/'+ formattedDate +'T003807Z&details=&location=&sprop=&sprop=name:#f">Save to Calendar</a> </button> </div>';
 	}
 
 	$('aside').html(posters);
@@ -62,7 +66,7 @@ function saveMovie(id){
 function save(result){
 	var title = result.title;
 	var release_date = result.release_dates.theater;
-	var formatted_date = release_date.replace(/-/gi, '')
+	var formatted_date = release_date.replace(/-/gi, '');
 	var synopsis = result.synopsis;
 	var poster = result.posters.original.replace(/tmb/, '320');
 
@@ -81,8 +85,8 @@ function save(result){
 		url: '/movies',
 		data: { movie: {
 			title: title,
-			release_date: release_date,
-			formatted_date: formatted_date,
+			release_date: releaseDate,
+			formatted_date: formattedDate,
 			synopsis: synopsis,
 			poster: poster,
 			status: 'coming soon'

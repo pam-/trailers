@@ -1,11 +1,13 @@
 $(document).ready(function() {
 	$('.user-show').hide();
 	$('.map-input').hide();
-	
-	$('#usermovies').on('click', function(){
-		$('#index').hide();
-		userPage();
-	});
+
+	var menu = $('header li')
+
+	menu.on('click', function(){
+		$('li').removeClass('active')
+		$(this).addClass('active');
+	})
 
 	$('#comingsoon').on('click', function(){
 		comingSoon();
@@ -16,6 +18,13 @@ $(document).ready(function() {
 	getMovies(url, 'Find Theaters!', 'watch')
 
 	$('#outnow').on('click', function(){
+		$('.user-show').hide();
+		$('#index').show();
 		getMovies(url, 'Find Theaters!', 'watch');
 	})
+
+	$('#usermovies').on('click', function(){
+		$('#index').hide();
+		userPage();
+	});
 });

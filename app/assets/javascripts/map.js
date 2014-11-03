@@ -25,7 +25,7 @@ function mapGen(){
     	success: function (xml){
 		  	values = xml.responseData.feed.entries;
 		  	findCoordinates(values);
-		  	// console.log(values)
+		  	console.log(values)
       },
     	error: function(){
     		console.log('something is broken')
@@ -83,9 +83,10 @@ function markerGen(lat, lng, theater_name, theater_url) {
 		features: [{
 			type: 'Feature',
 			properties: {
-				title: theater_name,
-				'marker-color': '#bada55',
+				title: theater_name + ' (Click to get tickets)',
+				'marker-color': '#ff676a',
 				'marker-size': 'large',
+				// iconUrl: "/assets/bodylogo.svg",
 				url: theater_url
 			},
 			geometry: {
