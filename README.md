@@ -1,6 +1,6 @@
-###Project 1 - PEARS
+###Project 3 - Git Reel
 
-###GA WDI DC September 2014 
+###GA WDI DC November 2014 
 
 **Overview**
 
