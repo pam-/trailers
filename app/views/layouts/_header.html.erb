@@ -1,5 +1,6 @@
 <header> 
-	<img src="/assets/headerlogo.svg">
+	<!-- <img src="/assets/headerlogo.svg"> -->
+	<%= image_tag ('headerlogo.svg') %> 
 	<ul>
 		<% if current_user %>
 			<li id="usermovies"><%= 'My Movies' %></li>
